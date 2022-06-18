@@ -16,10 +16,6 @@ const classArray = [
 
 const yourClass = () => {
   let randomClass = classArray[Math.floor(Math.random() * classArray.length)];
-  console.log(`You are part of the ${randomClass} here in Goose Town.`);
-  // if (randomClass === 'royal goose family') {
-  //   console.log(`Thank all your lucky stars for being part of the royal family. Must be nice...`);
-  // }
   return randomClass;
 }
 
@@ -28,16 +24,31 @@ const counter = () => {
   let classCheck = yourClass();
   count += 1;
   if (classCheck !== 'royal goose family') {
-    console.log(`Life: ${count}. Not a royal in this life...\n`)
-    counter();
+    counter()
   }
-  if (classCheck === 'royal goose family') {
-    console.log('Life:', count, 'Yay! You are part of the royal family in this lifetime...finally.\n');
-    if (count < 5) {
-      console.log(`Life: ${count}. Consider yourself lucky! Didn't take too long to be a royal.\n`)
-    }
+  return count;
+}
+
+const yourJourney = () => {
+  let reincarnationCycles = counter();
+
+  console.log(`Reincarnation cycle: ${reincarnationCycles}`);
+
+  if (reincarnationCycles < 5) {
+    return `Wow! It didn't take too long for you to be part of the royal lineage.`;
+  } else if (reincarnationCycles > 10) {
+    return `Took you a while to get here, but you are now part of the royal family in this lifetime!`;
+  } else {
+    return `You are royalty in this lifetime!`;
   }
 }
 
+
 yourName('Kirei','Tee');
-counter();
+// console.log(yourJourney());
+
+while(yourJourney() !== `Took you a while to get here, but you are now part of the royal family in this lifetime!`) {
+  yourJourney();
+}
+
+

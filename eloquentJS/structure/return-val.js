@@ -28,3 +28,4 @@ switch (weather) {
     console.log("Any type of day is a day to be grateful for.");
     break;
 }
+
