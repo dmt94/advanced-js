@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacques' Journal Journey</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="flex">
+    <h2>Jacques' Journal Journey</h2>
+    <h4>Is there a correlation?</h4>
+    <div class="header-img-container flex">
+      <img src="./images/wolf.png" alt="" class="header-image">
+      <!-- <img src="./images/pizza.png" alt="" class="header-image"> -->
+
+      <div class="correlation-choice-div flex">
+        <img src="./images/arrow.png" alt="" class="icon-img" id="variable-img">
+        <label for="corr-choice">Choose variable:</label>
+        <select name="choice-list" id="corr-choice" >
+          <option class="options"  value="none">None</option>
+          <option class="options"  value="carrot">Ate Carrot</option>
+          <option class="options"  value="ice-cream">Ate Ice Cream</option>
+          <option class="options"  value="nachos">Ate Nachos</option>
+          <option class="options"  value="peanuts">Ate Peanuts</option>
+          <option class="options"  value="pizza">Ate Pizza</option>
+          <option class="options"  value="beer">Drank Beer</option>
+          <option class="options"  value="exercise">Exercise</option>
+          <option class="options"  value="reading">Read a book</option>
+          <option class="options"  value="work">Work</option>
+        </select>
+      </div>
+
+      <img src="./images/squirrel.png" alt="" class="header-image">
+    </div>
+    
+  </header>
+  
+  <script src="./journal-object.js"></script>
+</body>
+</html>

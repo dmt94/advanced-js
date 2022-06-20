@@ -1,0 +1,35 @@
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(53, 52, 52);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-img {
+  width: 100px;
+}
+
+/* Header */
+
+.header-image {
+  width: 150px;
+}
+
+.header-img-container {
+  flex-direction: row;
+}
+
+/*Correlation Choice*/
+
+.correlation-choice-div {
+  margin: 10px;
+}
+
+#corr-choice {
+  margin: 5px;
+}
