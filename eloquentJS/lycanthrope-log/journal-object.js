@@ -154,9 +154,6 @@ choiceTwo.addEventListener('change', function() {
   
 })
 
-console.log(choiceOne.value);
-console.log(choiceTwo.value);
-
 
 //attaches a value to chosenVariable => will be used as an argument to tableFor function
 //gives result
@@ -221,13 +218,20 @@ for (let event of allEvents) {
 } 
 
 //creating a new event where jacques ate peanut AND did not brush teeth (!)
-
+let journalCopy = JOURNAL.map(entry => entry);
 let runCorrelationBtn = document.getElementById('run-corr-btn');
+let resultCorrelation = document.getElementById('str-var-correlation');
+let finalAnalysis = document.getElementById('final-analysis');
+let winner = document.getElementById('winner');
+let winningImg = document.getElementById('winning-img');
+
+let correlationResult;
+
 
 runCorrelationBtn.addEventListener('click', function() {
+
   let firstVal = choiceOne.value;
   let secVal = choiceTwo.value;
-  let journalCopy = JOURNAL.map(entry => entry);
 
   for (let entry of journalCopy) {
     if (firstVal.includes('-')) {
@@ -235,6 +239,11 @@ runCorrelationBtn.addEventListener('click', function() {
     }
     if (secVal.includes('-')) {
       secVal = secVal.replace('-', ' ');
+    }
+
+    if (firstVal === secVal) {
+      resultCorrelation.innerText = 'Pick different values';
+      return false;
     }
 
     if (firstVal === 'brushed teeth') {
@@ -259,8 +268,41 @@ runCorrelationBtn.addEventListener('click', function() {
     }
   }
 
-  let correlationResult = phi(tableFor(`${firstVal} ${secVal}`, journalCopy)).toFixed(3);
+  correlationResult = phi(tableFor(`${firstVal} ${secVal}`, journalCopy));
 
-  console.log(journalCopy);
-  console.log(correlationResult);
+  if (Number.isNaN(correlationResult)) {
+    resultCorrelation.innerText =  'Events did not occur together';
+  } else if (!(Number.isNaN(correlationResult))) {
+    resultCorrelation.innerText = 'φ = ' + correlationResult.toFixed(3);
+  }
+
+  if (correlationResult === 1) {
+    console.log('winner');
+    winner.innerText = 'WINNER! We found the culprit! When Jacques eats peanuts and doesn\'t brush his teeth that day, he turns into a squirrel.';
+    winningImg.src = './images/variables/winner.png';
+  }
+
+})
+
+
+//output result
+runCorrelationBtn.addEventListener('click', function() {
+
+  let firstVal = choiceOne.value;
+  let secVal = choiceTwo.value;
+  
+  if (firstVal !== secVal) {
+    if (correlationResult >= -1 && correlationResult <= -0.7) {
+      finalAnalysis.innerText = 'strong negative association';
+    } else if (correlationResult >= -0.7 && correlationResult <= -0.3 ) {
+      finalAnalysis.innerText = 'weak negative association';
+    } else if (correlationResult >= -0.3 && correlationResult < 0.3) {
+      finalAnalysis.innerText = 'little or no association';
+    } else if (correlationResult >= 0.3 && correlationResult < 0.7) {
+      finalAnalysis.innerText = 'weak positive association';
+    } else if (correlationResult >= 0.7 && correlationResult <= 1.0) {
+      finalAnalysis.innerText = 'strong positive association';
+    }
+  }
+
 })
