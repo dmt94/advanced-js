@@ -151,6 +151,29 @@ choice.addEventListener('change', function() {
   console.log(correlation);
 
   let finalResult = document.getElementById('result-percentage');
-  finalResult.innerText = correlation;
+  if (Number.isNaN(correlation)) {
+    finalResult.innerText = '';
+  } else {
+    finalResult.innerText = 'φ = ' + correlation;
+  }
 });
 
+// list all events in JOURNAL
+function journalEvents(journal) {
+  let events = [];
+  for (let entry of journal) {
+    for (let event of entry.events) {
+      //if event is not in the events yet, push
+      //ensures that there aren't any duplicate events in the final events array
+      if(!events.includes(event)) {
+        events.push(event);
+      }
+    }
+  }
+  return events;
+}
+
+let allEvents = journalEvents(JOURNAL).sort();
+
+
+console.log(allEvents);

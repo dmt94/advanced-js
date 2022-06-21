@@ -11,6 +11,7 @@
   <header class="flex">
     <h2>Jacques' Journal Journey</h2>
     <h4>Is there a correlation?</h4>
+    <h5>Phi Correlation Coefficient (<span class="coef-icon">φ</span>)</h5>
     <div class="header-img-container flex">
       <img src="./images/wolf.png" alt="" class="header-image">
       <!-- <img src="./images/pizza.png" alt="" class="header-image"> -->
@@ -26,6 +27,8 @@
           <option class="options" value="nachos">Ate Nachos</option>
           <option class="options" value="peanuts">Ate Peanuts</option>
           <option class="options" value="pizza">Ate Pizza</option>
+          <option class="options" value="spaghetti">Ate Spaghetti</option>
+          <option class="options" value="brushed-teeth">Brushed Teeth</option>
           <option class="options" value="beer">Drank Beer</option>
           <option class="options" value="exercise">Exercise</option>
           <option class="options" value="reading">Read a book</option>
@@ -36,16 +39,44 @@
       <img src="./images/squirrel.png" alt="" class="header-image">
     </div>
 
-    <div class="button-div">
-      <button type="submit" class="corr-btn">Run Correlation</button>
-    </div>
-
     <div class="correlation-result-div">
       <h3 id="result-percentage">Correlation</h3>
-      <h4 id="analysis-text">Analysis goes here</h4>
+      <h4 id="analysis-text"></h4>
     </div>
+
+
     
   </header>
+
+    <!--Run all variables-->
+    <div class="button-div flex">
+      <button type="submit" class="corr-btn">Run All Variables</button>
+      <span>Run all events and check correlation.</span>
+    </div>
+
+    <div class="variable-list-div flex" id="variable-list">
+      <h2>All Variables and Respective Correlations</h2>
+      <!-- <div class="item-div flex">
+        <h4 class="variable-item">carrot</h4>
+        <h4 class="variable-coefficient">0.014</h4>
+
+        for each event: 
+        - create a div
+        - add classNames: item-div and flex
+        - create h4
+        - add className: variable-item
+        - add textNode = event
+        - create (another) h4
+        - add className: variable-coefficient
+        - add textNode = coefficient value
+        - attach everything together
+
+        - final attach to id: variable-list
+
+      </div> -->
+      
+    </div>
+
   
   <script src="./journal-object.js"></script>
 </body>
