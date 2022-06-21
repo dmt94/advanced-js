@@ -1,3 +1,8 @@
+body {
+  background-color: rgb(249, 253, 228);
+  margin: 0;
+}
+
 * {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: rgb(53, 52, 52);
@@ -23,11 +28,30 @@
 /* Header */
 
 .header-image {
-  width: 150px;
+  width: 110px;
 }
 
 .header-img-container {
   flex-direction: row;
+}
+
+.corr-guide {
+  background-color: rgba(255, 241, 233, 0.341);
+  padding: 10px;
+  margin: 15px;
+  border:rgb(53, 52, 52) 1px solid;
+}
+
+.corr-guide > h5 {
+  margin: 10px;
+  font-size: 30px;
+}
+
+.corr-guide > span {
+  color: rgb(215, 71, 71);
+  font-size: 19px;
+  margin: 2px;
+  font-weight: 700;
 }
 
 /*Correlation Choice*/
@@ -36,7 +60,11 @@
   margin: 10px;
 }
 
-#corr-choice {
+.correlation-choice-div > label {
+  margin: 5px;
+}
+
+#corr-choice, #first-corr-choice, #second-corr-choice {
   margin: 5px;
   padding: 5px;
   border: none;
@@ -44,7 +72,25 @@
   background-color: rgb(246, 211, 136);
 }
 
+#first-corr-choice, #second-corr-choice {
+  background-color: rgb(232, 90, 29);
+  color: white;
+  font-size: 18px;
+}
+
+
 /*Correlation Button*/
+
+ .game-div .run-corr-btn {
+  background-color: rgb(255, 218, 68);
+  color: rgb(28, 28, 28);
+}
+
+ .game-div .run-corr-btn:hover {
+  background-color: rgb(212, 104, 58);
+  color: rgb(255, 248, 233);
+}
+
 
 .corr-btn {
   padding: 10px;
@@ -66,11 +112,44 @@
 
 #result-percentage, #analysis-text {
   font-family: Arial, Helvetica, sans-serif;
-}
-
-#result-percentage {
   color:rgb(235, 96, 96);
   font-size: 40px;
+  font-weight: 800;
+}
+
+#analysis-text {
+  font-size: 20px;
+}
+
+/* The Game */
+
+.game-div {
+  background-color: rgba(228, 250, 162, 0.711);
+  margin-bottom: 20px;
+}
+
+.game-div > h2 {
+  text-decoration: underline;
+}
+
+.game-div > span {
+  margin: 5px;
+  width: 60%;
+  font-size: 18px;
+}
+
+.variables-div {
+  flex-direction: row;
+  justify-content:space-evenly;
+}
+
+.first-variable-div, .second-variable-div {
+  margin: 10px;
+}
+
+#str-var-correlation {
+  font-size: 30px;
+  color:brown;
 }
 
 /* List of Variables */
@@ -82,3 +161,4 @@
 .item-div > h4 {
   margin: 10px;
 }
+

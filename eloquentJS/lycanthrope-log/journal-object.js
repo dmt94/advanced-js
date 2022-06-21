@@ -91,16 +91,6 @@ const JOURNAL = [
   {"events":["cauliflower","peanuts","brushed teeth","weekend"],"squirrel":false}
 ];
 
-/*
-Extract 2x2 table for a specific event from the journal
-loop over all the entries 
-tally how many times the [event] occurs in relation to [another event] (in this case, squirrel tranformations) 
-
-understand: 
-array of object entries
-each object has 2 properties: events & squirrel
- */
-
 function tableFor(event, journal) {
   let table = [0,0,0,0]; // tallies or count starts at 0
   for (let i = 0; i < journal.length; i++) {
@@ -137,24 +127,68 @@ choice.addEventListener('change', function() {
   variableImg.src = `./images/variables/${chosenValue}.png`;
 })
 
+//changes variable icon for variable one (based on picked variable)
+
+let choiceOne = document.getElementById('first-corr-choice');
+let choiceTwo = document.getElementById('second-corr-choice');
+
+choiceOne.addEventListener('change', function() {
+  let chosenValue = this.value;
+  let variableImg = document.getElementById('first-variable-img');
+  if (chosenValue === 'brushed-teeth') {
+    variableImg.src = `./images/variables/not-brushed-teeth.png`;
+  } else {
+    variableImg.src = `./images/variables/${chosenValue}.png`;
+  }
+  
+})
+
+choiceTwo.addEventListener('change', function() {
+  let chosenValue = this.value;
+  let variableImg = document.getElementById('second-variable-img');
+  if (chosenValue === 'brushed-teeth') {
+    variableImg.src = `./images/variables/not-brushed-teeth.png`;
+  } else {
+    variableImg.src = `./images/variables/${chosenValue}.png`;
+  }
+  
+})
+
+console.log(choiceOne.value);
+console.log(choiceTwo.value);
+
+
 //attaches a value to chosenVariable => will be used as an argument to tableFor function
 //gives result
 choice.addEventListener('change', function() {
   //used as argument to tableFor function
+  let analysis = document.getElementById('analysis-text');
   let chosenVariable = this.value;
   if (chosenVariable.includes('-')) {
     chosenVariable = chosenVariable.replace('-', ' ');
   }
   let chosenTable = tableFor(chosenVariable, JOURNAL);
   let correlation = phi(chosenTable);
-  console.log(chosenVariable);
-  console.log(correlation);
 
   let finalResult = document.getElementById('result-percentage');
   if (Number.isNaN(correlation)) {
     finalResult.innerText = '';
   } else {
-    finalResult.innerText = 'φ = ' + correlation;
+    finalResult.innerText = 'φ = ' + correlation.toFixed(4);
+
+    if (correlation >= -1 && correlation <= -0.7) {
+      analysis.innerText = 'strong negative association';
+    } else if (correlation >= -0.7 && correlation <= -0.3 ) {
+      analysis.innerText = 'weak negative association';
+    } else if (correlation >= -0.3 && correlation < 0.3) {
+      analysis.innerText = 'little or no association';
+    } else if (correlation >= 0.3 && correlation < 0.7) {
+      analysis.innerText = 'weak positive association';
+    } else if (correlation >= 0.7 && correlation <= 1.0) {
+      analysis.innerText = 'strong positive association';
+    }
+
+
   }
 });
 
@@ -174,6 +208,59 @@ function journalEvents(journal) {
 }
 
 let allEvents = journalEvents(JOURNAL).sort();
+let allEventsWithCorrelation = [];
+let significantCorrelations = [];
 
+//log all events with corresponding coefficient values & log significant correlations
+for (let event of allEvents) {
+  let correlation = phi(tableFor(event, JOURNAL)).toFixed(4);
+  if (correlation > 0.1 || correlation < -0.1) {
+    significantCorrelations.push(`${event}: ${correlation}`);
+  }
+  allEventsWithCorrelation.push(`${event}: ${correlation}`);
+} 
 
-console.log(allEvents);
+//creating a new event where jacques ate peanut AND did not brush teeth (!)
+
+let runCorrelationBtn = document.getElementById('run-corr-btn');
+
+runCorrelationBtn.addEventListener('click', function() {
+  let firstVal = choiceOne.value;
+  let secVal = choiceTwo.value;
+  let journalCopy = JOURNAL.map(entry => entry);
+
+  for (let entry of journalCopy) {
+    if (firstVal.includes('-')) {
+      firstVal = firstVal.replace('-',' ');
+    }
+    if (secVal.includes('-')) {
+      secVal = secVal.replace('-', ' ');
+    }
+
+    if (firstVal === 'brushed teeth') {
+      if (!entry.events.includes(firstVal) &&
+      entry.events.includes(secVal) ) {
+        entry.events.push(`${firstVal} ${secVal}`);
+      }
+    }
+
+    if (secVal === 'brushed teeth') {
+      if (entry.events.includes(firstVal) &&
+      !entry.events.includes(secVal) ) {
+        entry.events.push(`${firstVal} ${secVal}`);
+      }
+    }
+
+    if (firstVal !== 'brushed teeth' && secVal !== 'brushed teeth') {
+      if (entry.events.includes(firstVal) &&
+      entry.events.includes(secVal) ) {
+        entry.events.push(`${firstVal} ${secVal}`);
+      }
+    }
+  }
+
+  let correlationResult = phi(tableFor(`${firstVal} ${secVal}`, journalCopy)).toFixed(3);
+
+  console.log(journalCopy);
+  console.log(correlationResult);
+})

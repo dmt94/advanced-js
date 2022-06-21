@@ -10,8 +10,16 @@
 <body>
   <header class="flex">
     <h2>Jacques' Journal Journey</h2>
-    <h4>Is there a correlation?</h4>
-    <h5>Phi Correlation Coefficient (<span class="coef-icon">φ</span>)</h5>
+    <h4>Is there a correlation? Find the strongest variables.</h4>
+    
+    <div class="flex corr-guide">
+      <h5>Phi Correlation Coefficient (<span class="coef-icon">φ</span>)</h5>
+      <span>-1.0 to -0.7 : strong negative association</span>
+      <span>-0.7 to -0.3 : weak negative association</span>
+      <span>-0.3 to +0.3 : little or no association</span>
+      <span>+0.3 to +0.7 : weak positive association</span>
+      <span>+0.7 to +1.0 : strong positive association</span>
+    </div>
     <div class="header-img-container flex">
       <img src="./images/wolf.png" alt="" class="header-image">
       <!-- <img src="./images/pizza.png" alt="" class="header-image"> -->
@@ -43,10 +51,69 @@
       <h3 id="result-percentage">Correlation</h3>
       <h4 id="analysis-text"></h4>
     </div>
-
-
-    
   </header>
+
+    <div class="game-div flex">
+      <h2>Find the strongest variables</h2>
+      <span>Mix and match the variables to check if a stronger association exists.
+        Jacques wants to know if two existing events have an effect on his 
+        squirrel lycanthropy condition. For example, do eating carrots AND exercising
+        on the same day have a strong correlation to him changing into a squirrel?
+      </span>
+      <div class="variables-div flex">
+        <div class="first-variable-div flex">
+          <h3>First Variable/Event</h3>
+          <!--Pick FIRST VARIABLE-->
+          <div class="correlation-choice-div flex">
+            <img src="./images/variables/none.png" alt="" class="icon-img" id="first-variable-img">
+    
+            <label for="first-corr-choice">Choose variable:</label>
+            <select name="choice-list" id="first-corr-choice" >
+              <option class="options" value="none">None</option>
+              <option class="options" value="carrot">Ate Carrot</option>
+              <option class="options" value="ice-cream">Ate Ice Cream</option>
+              <option class="options" value="nachos">Ate Nachos</option>
+              <option class="options" value="peanuts">Ate Peanuts</option>
+              <option class="options" value="pizza">Ate Pizza</option>
+              <option class="options" value="spaghetti">Ate Spaghetti</option>
+              <option class="options" value="brushed-teeth">Not Brushed Teeth</option>
+              <option class="options" value="beer">Drank Beer</option>
+              <option class="options" value="exercise">Exercise</option>
+              <option class="options" value="reading">Read a book</option>
+              <option class="options" value="work">Work</option>
+            </select>
+          </div>
+          <!--End of FIRST VARIABLE CHOICE-->
+        </div>
+
+        <div class="second-variable-div flex">
+          <h3>Second Variable/Event</h3>
+          <!--Pick SECOND VARIABLE-->
+          <div class="correlation-choice-div flex">
+            <img src="./images/variables/none.png" alt="" class="icon-img" id="second-variable-img">
+    
+            <label for="second-corr-choice">Choose variable:</label>
+            <select name="choice-list" id="second-corr-choice" >
+              <option class="options" value="none">None</option>
+              <option class="options" value="carrot">Ate Carrot</option>
+              <option class="options" value="ice-cream">Ate Ice Cream</option>
+              <option class="options" value="nachos">Ate Nachos</option>
+              <option class="options" value="peanuts">Ate Peanuts</option>
+              <option class="options" value="pizza">Ate Pizza</option>
+              <option class="options" value="spaghetti">Ate Spaghetti</option>
+              <option class="options" value="brushed-teeth">Not Brushed Teeth</option>
+              <option class="options" value="beer">Drank Beer</option>
+              <option class="options" value="exercise">Exercise</option>
+              <option class="options" value="reading">Read a book</option>
+              <option class="options" value="work">Work</option>
+            </select>
+          </div>
+          <!--End of SECOND VARIABLE choice-->
+        </div>
+      </div>
+      <button type="submit" class="corr-btn run-corr-btn" id="run-corr-btn">Run Correlation</button>
+      <h3 id="str-var-correlation">Correlation</h3>
+    </div>
 
     <!--Run all variables-->
     <div class="button-div flex">
@@ -55,7 +122,7 @@
     </div>
 
     <div class="variable-list-div flex" id="variable-list">
-      <h2>All Variables and Respective Correlations</h2>
+      <h2>All Variables and Respective Correlations:</h2>
       <!-- <div class="item-div flex">
         <h4 class="variable-item">carrot</h4>
         <h4 class="variable-coefficient">0.014</h4>
