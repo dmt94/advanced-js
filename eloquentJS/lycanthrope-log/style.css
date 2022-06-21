@@ -135,6 +135,7 @@ header > h2 {
 .game-div > h2 {
   text-decoration: underline;
   margin-top: 30px;
+  font-weight: 800;
 }
 
 .game-div > span {
@@ -150,7 +151,11 @@ header > h2 {
 }
 
 .first-variable-div, .second-variable-div {
-  margin: 10px;
+  margin: 20px;
+}
+
+.flex > h3 {
+  font-weight: 700;
 }
 
 #str-var-correlation, #final-analysis, #analysis-text {

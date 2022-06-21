@@ -280,6 +280,9 @@ runCorrelationBtn.addEventListener('click', function() {
     console.log('winner');
     winner.innerText = 'WINNER! We found the culprit! When Jacques eats peanuts and doesn\'t brush his teeth that day, he turns into a squirrel.';
     winningImg.src = './images/variables/winner.png';
+  } else {
+    winner.innerText = '';
+    winningImg.src = '';
   }
 
 })
@@ -290,7 +293,7 @@ runCorrelationBtn.addEventListener('click', function() {
 
   let firstVal = choiceOne.value;
   let secVal = choiceTwo.value;
-  
+
   if (firstVal !== secVal) {
     if (correlationResult >= -1 && correlationResult <= -0.7) {
       finalAnalysis.innerText = 'strong negative association';
