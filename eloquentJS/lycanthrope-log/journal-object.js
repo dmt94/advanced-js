@@ -204,9 +204,12 @@ function journalEvents(journal) {
   return events;
 }
 
+let allEventsBtn = document.getElementById('all-event-btn');
 let allEvents = journalEvents(JOURNAL).sort();
 let allEventsWithCorrelation = [];
 let significantCorrelations = [];
+
+let variableListDiv = document.getElementById('variable-list');
 
 //log all events with corresponding coefficient values & log significant correlations
 for (let event of allEvents) {
@@ -216,6 +219,34 @@ for (let event of allEvents) {
   }
   allEventsWithCorrelation.push(`${event}: ${correlation}`);
 } 
+
+let count = 0;
+allEventsBtn.addEventListener('click', function() {
+  count += 1;
+  if (count === 1) {
+    //make div
+    let createDiv = document.createElement('div');
+    createDiv.classList.add('item-div');
+    createDiv.classList.add('flex');
+
+    for (let entries of allEventsWithCorrelation) {
+      // //make text
+      let createH4 = document.createElement('h4');
+      createH4.classList.add('variable-item');
+      let createH4Content = document.createTextNode(entries);
+      createH4.appendChild(createH4Content);
+      createDiv.appendChild(createH4);
+    }
+    variableListDiv.appendChild(createDiv);
+  }
+
+  for (let entries of significantCorrelations) {
+    console.log(entries);
+  }
+})
+
+
+
 
 //creating a new event where jacques ate peanut AND did not brush teeth (!)
 let journalCopy = JOURNAL.map(entry => entry);
@@ -272,8 +303,10 @@ runCorrelationBtn.addEventListener('click', function() {
 
   if (Number.isNaN(correlationResult)) {
     resultCorrelation.innerText =  'Events did not occur together';
+
   } else if (!(Number.isNaN(correlationResult))) {
     resultCorrelation.innerText = 'φ = ' + correlationResult.toFixed(3);
+    finalAnalysis.innerText = '';
   }
 
   if (correlationResult === 1) {
@@ -293,6 +326,10 @@ runCorrelationBtn.addEventListener('click', function() {
 
   let firstVal = choiceOne.value;
   let secVal = choiceTwo.value;
+
+  if (firstVal === secVal) {
+    finalAnalysis.innerText = '';
+  }
 
   if (firstVal !== secVal) {
     if (correlationResult >= -1 && correlationResult <= -0.7) {
