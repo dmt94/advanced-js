@@ -32,4 +32,37 @@
 
 #corr-choice {
   margin: 5px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(246, 211, 136);
+}
+
+/*Correlation Button*/
+
+.corr-btn {
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: black;
+  color: rgb(255, 232, 130);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+}
+
+.corr-btn:hover {
+  background-color: rgb(255, 222, 101);
+  color: black;
+  cursor: pointer;
+  transition: all linear 500ms;
+}
+
+#result-percentage, #analysis-text {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+#result-percentage {
+  color:rgb(235, 96, 96);
+  font-size: 40px;
 }

@@ -16,23 +16,33 @@
       <!-- <img src="./images/pizza.png" alt="" class="header-image"> -->
 
       <div class="correlation-choice-div flex">
-        <img src="./images/arrow.png" alt="" class="icon-img" id="variable-img">
+        <img src="./images/variables/none.png" alt="" class="icon-img" id="variable-img">
+
         <label for="corr-choice">Choose variable:</label>
         <select name="choice-list" id="corr-choice" >
-          <option class="options"  value="none">None</option>
-          <option class="options"  value="carrot">Ate Carrot</option>
-          <option class="options"  value="ice-cream">Ate Ice Cream</option>
-          <option class="options"  value="nachos">Ate Nachos</option>
-          <option class="options"  value="peanuts">Ate Peanuts</option>
-          <option class="options"  value="pizza">Ate Pizza</option>
-          <option class="options"  value="beer">Drank Beer</option>
-          <option class="options"  value="exercise">Exercise</option>
-          <option class="options"  value="reading">Read a book</option>
-          <option class="options"  value="work">Work</option>
+          <option class="options" value="none">None</option>
+          <option class="options" value="carrot">Ate Carrot</option>
+          <option class="options" value="ice-cream">Ate Ice Cream</option>
+          <option class="options" value="nachos">Ate Nachos</option>
+          <option class="options" value="peanuts">Ate Peanuts</option>
+          <option class="options" value="pizza">Ate Pizza</option>
+          <option class="options" value="beer">Drank Beer</option>
+          <option class="options" value="exercise">Exercise</option>
+          <option class="options" value="reading">Read a book</option>
+          <option class="options" value="work">Work</option>
         </select>
       </div>
 
       <img src="./images/squirrel.png" alt="" class="header-image">
+    </div>
+
+    <div class="button-div">
+      <button type="submit" class="corr-btn">Run Correlation</button>
+    </div>
+
+    <div class="correlation-result-div">
+      <h3 id="result-percentage">Correlation</h3>
+      <h4 id="analysis-text">Analysis goes here</h4>
     </div>
     
   </header>

@@ -119,12 +119,38 @@ function tableFor(event, journal) {
   return table; // final table is returned
 }
 
-// let correlation = tableFor(choice, JOURNAL);
+let phi = (table) => {
+  return (table[3] * table[0] - table[2] * table[1]) /
+    Math.sqrt((table[2] + table[3]) *
+      (table[0] + table[1]) *
+      (table[1] + table[3]) *
+      (table[0] + table[2]));
+}
 
-// console.log(tableFor('pizza', JOURNAL));
+let choice = document.getElementById('corr-choice');
 
-document.getElementById('corr-choice').addEventListener('change', function() {
+
+//changes image based on variable picked
+choice.addEventListener('change', function() {
   let chosenValue = this.value;
-  
-  console.log('You selected:', chosenValue);
+  let variableImg = document.getElementById('variable-img');
+  variableImg.src = `./images/variables/${chosenValue}.png`;
 })
+
+//attaches a value to chosenVariable => will be used as an argument to tableFor function
+//gives result
+choice.addEventListener('change', function() {
+  //used as argument to tableFor function
+  let chosenVariable = this.value;
+  if (chosenVariable.includes('-')) {
+    chosenVariable = chosenVariable.replace('-', ' ');
+  }
+  let chosenTable = tableFor(chosenVariable, JOURNAL);
+  let correlation = phi(chosenTable);
+  console.log(chosenVariable);
+  console.log(correlation);
+
+  let finalResult = document.getElementById('result-percentage');
+  finalResult.innerText = correlation;
+});
+
