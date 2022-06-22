@@ -211,8 +211,6 @@ let significantCorrelations = [];
 
 let variableListDiv = document.getElementById('variable-list');
 
-console.log(significantCorrelations);
-
 //log all events with corresponding coefficient values & log significant correlations
 for (let event of allEvents) {
   let correlation = phi(tableFor(event, JOURNAL)).toFixed(4);
@@ -243,87 +241,89 @@ allEventsBtn.addEventListener('click', function() {
     let createLine = document.createElement('hr');
     createLine.classList.add('variable-line');
     variableListDiv.appendChild(createLine);
-  }
 
-  for (let entries of significantCorrelations) {
-    console.log(entries);
-    let eventName = entries[0];
-    let significantCorrelation = entries[1];
-
-    //main attachment
-    let significantDiv = document.getElementById('significant-div');
-    // second main attachment
-    let createSigDiv = document.createElement('div');
-    createSigDiv.classList.add('main-significant-div');
-
-    // create first variable
-
-    let createFirstVariableDiv = document.createElement('div');
-    createFirstVariableDiv.classList.add('flex');
-    createFirstVariableDiv.classList.add('variable-div');
-
-    let createImg = document.createElement('img');
-    createImg.classList.add('first-variable-img');
-    if (eventName.includes(' ')) {
-      eventName = eventName.replace(' ', '-');
-    }
-    createImg.src = `./images/variables/${eventName}.png`;
-
-    let createFirstVariableText = document.createElement('h4');
-    createFirstVariableText.classList.add('sigg-corr-text');
-    if (eventName.includes('-')) {
-      eventName = eventName.replace('-', ' ');
-    }
-    let createFirstVariableContent = document.createTextNode(eventName);
-
-    createFirstVariableText.appendChild(createFirstVariableContent);
-    createFirstVariableDiv.appendChild(createImg);
-    createFirstVariableDiv.appendChild(createFirstVariableText);
-    createSigDiv.appendChild(createFirstVariableDiv);
-
-    //create arrow div
-
-    let createArrowDiv = document.createElement('div');
-    createArrowDiv.classList.add('flex');
-    createArrowDiv.classList.add('variable-div');
-
-    let arrowImg = document.createElement('img');
-    arrowImg.classList.add('arrow-img');
-    arrowImg.src = `./images/arrow.png`;
-
-    let createSigCorr = document.createElement('h4');
-    createSigCorr.classList.add('sig-corr-text');
-    createSigCorr.classList.add('sig-corr-color');
-
-    let createSigCorrContent = document.createTextNode(significantCorrelation);
-
-    createSigCorr.appendChild(createSigCorrContent);
-    createArrowDiv.appendChild(arrowImg);
-    createArrowDiv.appendChild(createSigCorr);
-    createSigDiv.appendChild(createArrowDiv);
+    // create significant div
+    for (let entries of significantCorrelations) {
+      let eventName = entries[0];
+      let significantCorrelation = entries[1];
   
-
-    // create second variable
-
-    let createSecondVariableDiv = document.createElement('div');
-    createSecondVariableDiv.classList.add('flex');
-    createSecondVariableDiv.classList.add('variable-div');
-
-    let createImg2 = document.createElement('img');
-    createImg2.classList.add('second-variable-img');
-    createImg2.src = './images/squirrel.png';
-
-    let createSecondVariableText = document.createElement('h4');
-    createSecondVariableText.classList.add('sig-corr-text');
-    let createSecondVariableContent = document.createTextNode('Squirrel Morph');
-    createSecondVariableText.appendChild(createSecondVariableContent);
-
-    createSecondVariableDiv.appendChild(createImg2);
-    createSecondVariableDiv.appendChild(createSecondVariableText);
-    createSigDiv.appendChild(createSecondVariableDiv);
+      //main attachment
+      let significantDiv = document.getElementById('significant-div');
+      // second main attachment
+      let createSigDiv = document.createElement('div');
+      createSigDiv.classList.add('main-significant-div');
+  
+      // create first variable
+  
+      let createFirstVariableDiv = document.createElement('div');
+      createFirstVariableDiv.classList.add('flex');
+      createFirstVariableDiv.classList.add('variable-div');
+  
+      let createImg = document.createElement('img');
+      createImg.classList.add('first-variable-img');
+      if (eventName.includes(' ')) {
+        eventName = eventName.replace(' ', '-');
+      }
+      createImg.src = `./images/variables/${eventName}.png`;
+  
+      let createFirstVariableText = document.createElement('h4');
+      
+      if (eventName.includes('-')) {
+        eventName = eventName.replace('-', ' ');
+      }
+  
+      let createFirstVariableContent = document.createTextNode(eventName);
+      createFirstVariableText.classList.add('sigg-corr-text');
+  
+      createFirstVariableText.appendChild(createFirstVariableContent);
+      createFirstVariableDiv.appendChild(createImg);
+      createFirstVariableDiv.appendChild(createFirstVariableText);
+      createSigDiv.appendChild(createFirstVariableDiv);
+  
+      //create arrow div
+  
+      let createArrowDiv = document.createElement('div');
+      createArrowDiv.classList.add('flex');
+      createArrowDiv.classList.add('variable-div');
+  
+      let arrowImg = document.createElement('img');
+      arrowImg.classList.add('arrow-img');
+      arrowImg.src = `./images/arrow.png`;
+  
+      let createSigCorr = document.createElement('h4');
+      createSigCorr.classList.add('sig-corr-text');
+      createSigCorr.classList.add('sig-corr-color');
+  
+      let createSigCorrContent = document.createTextNode(significantCorrelation);
+  
+      createSigCorr.appendChild(createSigCorrContent);
+      createArrowDiv.appendChild(arrowImg);
+      createArrowDiv.appendChild(createSigCorr);
+      createSigDiv.appendChild(createArrowDiv);
     
-    //attach
-    significantDiv.appendChild(createSigDiv);
+  
+      // create second variable
+  
+      let createSecondVariableDiv = document.createElement('div');
+      createSecondVariableDiv.classList.add('flex');
+      createSecondVariableDiv.classList.add('variable-div');
+  
+      let createImg2 = document.createElement('img');
+      createImg2.classList.add('second-variable-img');
+      createImg2.src = './images/squirrel.png';
+  
+      let createSecondVariableText = document.createElement('h4');
+      createSecondVariableText.classList.add('sig-corr-text');
+      let createSecondVariableContent = document.createTextNode('Squirrel Morph');
+      createSecondVariableText.appendChild(createSecondVariableContent);
+  
+      createSecondVariableDiv.appendChild(createImg2);
+      createSecondVariableDiv.appendChild(createSecondVariableText);
+      createSigDiv.appendChild(createSecondVariableDiv);
+      
+      //attach
+      significantDiv.appendChild(createSigDiv);
+    }
   }
 })
 
@@ -391,7 +391,6 @@ runCorrelationBtn.addEventListener('click', function() {
   }
 
   if (correlationResult === 1) {
-    console.log('winner');
     winner.innerText = 'WINNER! We found the culprit! When Jacques eats peanuts and doesn\'t brush his teeth that day, he turns into a squirrel.';
     winningImg.src = './images/variables/winner.png';
   } else {
