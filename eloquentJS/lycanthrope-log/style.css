@@ -199,6 +199,40 @@ header > h2 {
   font-weight: 700;
 }
 
+.variable-line {
+  opacity: 1;
+  border: 1px solid black;
+  width: 80%;
+}
+
+/* Significant Div */
+.main-significant-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.first-variable-img, .second-variable-img, .arrow-img {
+  width: 100px;
+  margin: 10px;
+}
+
+.sig-corr-text {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sig-corr-color {
+  color:rgb(215, 71, 71);
+}
+
+.variable-div {
+  margin: 20px;
+}
+
+#significant-div {
+  margin-bottom: 30px;
+}
+
 /* Media Query */
 @media only screen and (max-width: 600px) {
   body {
