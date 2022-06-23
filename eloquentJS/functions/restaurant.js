@@ -8,7 +8,7 @@ const APPETIZERS = [
   ['hunkle\'s homely salad', 15],
   ['persephone\'s spring salad', 15],
   ['braised kobe beef tacos', 25],
-  ['sautéed carab cake', 18],
+  ['sautéed crab cake', 18],
   ['lobster latke cake', 22],
 ];
 
@@ -19,7 +19,7 @@ const MAIN_COURSE = [
   ['lobster pasta', 32],
   ['queen\'s bone-in ribeye', 105],
   ['grilled branzino salsa verde', 28],
-  ['smoked lavaneder brisket', 27],
+  ['smoked lavender brisket', 27],
   ['seaking cacio e pepe', 22],
   ['stuffed chicken breast', 22],
   ['seared habanero scallops with basil risotto', 24],
@@ -45,7 +45,7 @@ const DRINKS = [
   ['miami vice', 15],
   ['lavender lemonade', 8],
   ['water', 0],
-  ['iced elerberry tea', 8],
+  ['iced elderberry tea', 8],
   ['lemon-rosemary sun tea', 8],
   ['matcha green tea', 8],
   ['iced ginger tea', 8],
@@ -53,8 +53,8 @@ const DRINKS = [
   ['frozen salted espresso martini', 15],
   ['frozen aperol spritzes', 15],
   ['ranch rosé', 15],
-  ['moet & chandon, brut "imperial"', 100],
-  ['moet & chandon, rose "imperial"', 108],
+  ['moet & chandon, brut "Imperial"', 100],
+  ['moet & chandon, rose "Imperial"', 108],
   ['pinot noir, lavender pyramid valley', 115]
 ];
 
@@ -80,6 +80,10 @@ let person1Meal = grabRandom(MAIN_COURSE);
 let person1MealName = grabMealName(person1Meal);
 let person1MealPrice = grabMealPrice(person1Meal);
 
+let person1Dessert = grabRandom(DESSERTS);
+let person1DessertName = grabMealName(person1Dessert);
+let person1DessertPrice = grabMealPrice(person1Dessert);
+
 let person1Drink = grabRandom(DRINKS);
 let person1DrinkName = grabMealName(person1Drink);
 let person1DrinkPrice = grabMealPrice(person1Drink);
@@ -93,58 +97,67 @@ let person2Meal = grabRandom(MAIN_COURSE);
 let person2MealName = grabMealName(person2Meal);
 let person2MealPrice = grabMealPrice(person2Meal);
 
+let person2Dessert = grabRandom(DESSERTS);
+let person2DessertName = grabMealName(person2Dessert);
+let person2DessertPrice = grabMealPrice(person2Dessert);
+
 let person2Drink = grabRandom(DRINKS);
 let person2DrinkName = grabMealName(person2Drink);
 let person2DrinkPrice = grabMealPrice(person2Drink);
 
 //total price 
-let grabPrice = (app, main, drink) => {
-  return app + main + drink;
+let grabPrice = (app, main, dess, drink) => {
+  return app + main + dess + drink;
 }
 
-let person1Total = grabPrice(person1AppetizerPrice, person1MealPrice, person1DrinkPrice);
-let person2Total = grabPrice(person2AppetizerPrice, person2MealPrice, person2DrinkPrice);
+let person1Total = grabPrice(person1AppetizerPrice, person1MealPrice, person1DessertPrice, person1DrinkPrice);
+let person2Total = grabPrice(person2AppetizerPrice, person2MealPrice, person2DessertPrice, person2DrinkPrice);
 
 let grabFinalAmount = (person1Total, person2Total, tip) => {
   let total = person1Total + person2Total;
-  return total + (total * tip);
+  return (total + (total * tip)).toFixed(2);
 };
 
-let finalAmountTotal = grabFinalAmount(person1Total, person2Total, 0.20);
-
-//check
-// console.log(person1AppetizerName, person1AppetizerPrice);
-// console.log(person1Meal, person1MealPrice);
-// console.log(person1Drink, person1DrinkPrice);
-
-// console.log(person2Appetizer, person2AppetizerPrice);
-// console.log(person2Meal, person2MealPrice);
-// console.log(person2Drink, person2DrinkPrice);
-
-// console.log(person1Total);
-// console.log(person2Total);
-// console.log(finalAmountTotal);
-
+//Dinner quality
 const VIBE_LIST = ['amazing', 'stellar', 'romantic', 'fun', 'beautiful'];
-const PARTNER_DESC = ['lover', 'sweetheart', 'best friend', 'partner', 'bestie', 'amore'];
-const SERVICE_QUALITY = ['phenomenal', 'amazing', 'spectacular', 'good', 'not terrible', 'okay', 'not what both of you expected']
+const PARTNER_DESC = ['lover', 'sweetheart', 'best friend', 'partner', 'bestie', 'soulmate'];
+const SERVICE_QUALITY = ['phenomenal', 'amazing', 'spectacular', 'good', 'not terrible', 'okay', 'not what both of you expected'];
 
 let theVibe = grabRandom(VIBE_LIST);
 let mealPartner = grabRandom(PARTNER_DESC);
-let mealPartnerName = grabPartnersName();
+theVibe = 'super fun';
+mealPartner = 'sister bestie';
 
 function grabPartnersName() {
-  let yourPartnerName = rlSync.question("What is your partner\'s name?");
+  let yourPartnerName = rlSync.question(`What is your ${mealPartner}'s name? `);
   return yourPartnerName;
 }
 
 function tipChoice() {
-  let whatTip = rlSync.question("How much do you want to pay in tips?");
+  let whatTip = rlSync.question("How much do you want to pay in tips? (10%, 20%, 30%...?) ");
+  while (Number.isNaN(Number(whatTip)) && (typeof Number(whatTip) !== 'number')) {
+    console.log('Type a valid numeric whole number tip percentage.');
+    tipChoice();
+  }
+  return Number(whatTip)/100;
 }
 
 console.log(`~-~ Welcome to ${RESTAURANT_NAME} ~-~\n`)
-console.log(`You are having ${['a','e','i','o','u'].includes(theVibe[0]) ? 'an' : 'a'} ${theVibe} meal with your ${mealPartner}.`);
+console.log(`You are having ${['a','e','i','o','u'].includes(theVibe[0]) ? 'an' : 'a'} ${theVibe} meal with your ${mealPartner}.\n`);
 
-console.log(`${mealPartnerName} had ${person2AppetizerName}, ${person2MealName}, and ${person2DrinkName}`);
-console.log(`You had ${person1AppetizerName}, ${person1MealName}, and ${person1DrinkName}`);
-console.log(`The whole meal costs $${person1Total + person2Total}`)
+let mealPartnerName = grabPartnersName();
+
+console.log(`\n${mealPartnerName} had ${person2AppetizerName}, ${person2MealName}, and ${person2DrinkName}.`);
+console.log(`You had ${person1AppetizerName}, ${person1MealName}, and ${person1DrinkName}.\n`);
+
+console.log(`For dessert, ${mealPartnerName} had ${person2DessertName}. You had a delicious ${person1DessertName}.\n`);
+console.log(`The whole meal costs $${person1Total + person2Total}.00`);
+
+let service = grabRandom(SERVICE_QUALITY);
+
+console.log(`The service was ${service}...`);
+
+let yourTip = tipChoice();
+let finalAmountTotal = grabFinalAmount(person1Total, person2Total, yourTip);
+
+console.log(`The total meal cost (with tips) is $${finalAmountTotal}`);
