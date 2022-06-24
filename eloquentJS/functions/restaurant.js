@@ -125,8 +125,6 @@ const SERVICE_QUALITY = ['phenomenal', 'amazing', 'spectacular', 'good', 'not te
 
 let theVibe = grabRandom(VIBE_LIST);
 let mealPartner = grabRandom(PARTNER_DESC);
-theVibe = 'super fun';
-mealPartner = 'sister bestie';
 
 function grabPartnersName() {
   let yourPartnerName = rlSync.question(`What is your ${mealPartner}'s name? `);
@@ -150,7 +148,7 @@ let mealPartnerName = grabPartnersName();
 console.log(`\n${mealPartnerName} had ${person2AppetizerName}, ${person2MealName}, and ${person2DrinkName}.`);
 console.log(`You had ${person1AppetizerName}, ${person1MealName}, and ${person1DrinkName}.\n`);
 
-console.log(`For dessert, ${mealPartnerName} had ${person2DessertName}. You had a delicious ${person1DessertName}.\n`);
+console.log(`For dessert, ${mealPartnerName} had ${person2DessertName}. You ${person2Dessert === person1Dessert ? 'also got' : 'got'} a delicious ${person1DessertName}.\n`);
 console.log(`The whole meal costs $${person1Total + person2Total}.00`);
 
 let service = grabRandom(SERVICE_QUALITY);
