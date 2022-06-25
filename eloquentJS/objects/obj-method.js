@@ -39,7 +39,7 @@ hunkle.saysActivity = saysActivity;
 
 
 console.log('Hunkle says:', hunkle.saysExcited());
-console.log('Hunkle says:', hunkle.saysGame('League'));
+console.log('Hunkle says:', hunkle.saysGame('Fall Guys'));
 console.log('Hunkle says: I want to', hunkle.saysActivity(ACTIVITIES), 'with you');
 
 
