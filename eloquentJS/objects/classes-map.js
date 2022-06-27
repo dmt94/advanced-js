@@ -33,7 +33,7 @@ const hunkleGymLead = Object.create(gymLeader);
 //if property value is different, it counts as own property
 hunkleGymLead.name = "Hunkle",
 hunkleGymLead.badge = "electric arrow",
-hunkleGymLead.symbol = "electric arrow",
+hunkleGymLead.symbol = "pentagon",
 hunkleGymLead.mood = "lukewarm",
 
 console.log(hunkleGymLead);
@@ -44,4 +44,21 @@ for (let key in hunkleGymLead) {
   } else {
     continue;
   }
+}
+
+const badges = ['cloud', 'rainbow', 'jupiter', 'rose quartz'];
+
+// for/of iterates over strings and arrays, not objects
+for (let entry of Object.entries(hunkleGymLead)) {
+  console.log(entry);
+}
+
+// with arrays and strings... for/in logs the index vals ... for/of logs array values/elements
+
+for (let index in badges) {
+  console.log(index);
+}
+
+for (let badge of badges) {
+  console.log(badge);
 }
