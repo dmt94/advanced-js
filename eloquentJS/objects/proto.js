@@ -18,6 +18,8 @@ let UnoRoboPhrases = [
 let grabRandomPhrase = (arr) =>  arr[Math.floor((Math.random() * arr.length))];
 UnoRobo.speak(grabRandomPhrase(UnoRoboPhrases));
 
+console.log(protoRobo);
+console.log(UnoRobo); // logs its own properties
 
-console.log(UnoRobo.speak());
+
 
