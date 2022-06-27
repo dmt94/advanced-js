@@ -16,4 +16,32 @@ class = defines the shape of [a type of object]
  right prototype is automatically created, 
  bound to this in the function, and returned at the end of the function.
 */
+let ages = new Map();
 
+ages.set("Kirei", 22);
+ages.set("Hunkle", 23);
+
+console.log(ages);
+
+const gymLeader = {
+  name: "Kireyne",
+  badge: "moonstone",
+  symbol: "circle",
+}
+
+const hunkleGymLead = Object.create(gymLeader);
+//if property value is different, it counts as own property
+hunkleGymLead.name = "Hunkle",
+hunkleGymLead.badge = "electric arrow",
+hunkleGymLead.symbol = "electric arrow",
+hunkleGymLead.mood = "lukewarm",
+
+console.log(hunkleGymLead);
+
+for (let key in hunkleGymLead) {
+  if (hunkleGymLead.hasOwnProperty(key)) {
+    console.log(key);
+  } else {
+    continue;
+  }
+}
