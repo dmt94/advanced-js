@@ -4,7 +4,6 @@
 // pop removes from the end
 
 let letters = [
-  'A',
   'B',
   'C',
   'D',
