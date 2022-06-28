@@ -11,6 +11,6 @@ function pizzaHere() {
 }
 
 console.log('wating for pizza...');
-setTimeout(stillWaiting, 0);
-setTimeout(gettingHungry, 0);
-setTimeout(pizzaHere, 0);
+setTimeout(stillWaiting, 1200);
+setTimeout(gettingHungry, 3000);
+setTimeout(pizzaHere, 4000);
