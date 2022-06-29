@@ -24,7 +24,15 @@ global()  isValid = false
 var x = 'x';
 
 function findName() {
+  // logB(); // => undefined bc the variable b is declared using 'var' and comes after 
+
+  console.log(x);
+  //checks parent environment (global in this case, to look for x)
   var b = 'b';
+  logB();
+  function logB() {
+    console.log(b);
+  }
   return printName();
 }
 
@@ -39,3 +47,28 @@ function sayMyName() {
 }
 
 sayMyName();
+
+
+
+/* How to invoke a function returned by another function? */
+
+function myFaveColor() {
+  var color = 'lavender';
+  return function myFaveWarmColor() {
+    var color2 = 'mandarin';
+    return function myFaveCoolColor() {
+      var color3 = 'electric blue';
+      return '#3EA1FD';
+    }
+  }
+}
+
+//returns [Function: myFaveWarmColor];
+console.log(myFaveColor());
+
+//returns [Function: myFaveCoolColor];
+console.log(myFaveColor()());
+
+//returns '#3EA1FD'
+console.log(myFaveColor()()());
+
