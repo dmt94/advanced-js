@@ -58,7 +58,7 @@ function myFaveColor() {
     var color2 = 'mandarin';
     return function myFaveCoolColor() {
       var color3 = 'electric blue';
-      return '#3EA1FD';
+      return `#3EA1FD and ${color2}`;
     }
   }
 }
@@ -69,6 +69,8 @@ console.log(myFaveColor());
 //returns [Function: myFaveCoolColor];
 console.log(myFaveColor()());
 
-//returns '#3EA1FD'
+//returns '#3EA1FD and __'
+//innermost scope has access to outer scopes
+//outermost scope = global scope
 console.log(myFaveColor()()());
 
