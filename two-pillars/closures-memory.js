@@ -1,0 +1,4 @@
+/*
+Closures are memory efficient
+Closures allow encapsulation
+*/
