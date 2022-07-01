@@ -1,5 +1,5 @@
-//be careful initializing functions in loops
-//only initialize function once
+// be careful initializing functions in loops
+// only initialize function once
 
 function askMe() {
   console.log('Are you annoyed yet?');

@@ -23,7 +23,6 @@ for (let i = 0; i < arr.length; i++) {
 // which allows {} creates scope for each i
 // so that "i" is scoped within block
 
-
 //using Closures if have to use (var)
 
 const vowels = [
@@ -33,7 +32,7 @@ const vowels = [
   'o',
   'u',
   'y',
-]
+];
 
 for (var i = 0; i < vowels.length; i++) {
   (function(closureI) {
