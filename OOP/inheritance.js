@@ -20,6 +20,8 @@ fiona.__proto__ //Elf
 
 //better
 class Character {
+  #age = 1000; //part of state that we can use in other areas, #private variable
+  //cant access in instances
   constructor(name, status, weapon) {
     this.name = name;
     this.status = status;
@@ -28,7 +30,11 @@ class Character {
   attack() {
     return `${this.status} ${this.name} attacks with ${this.weapon}`;
   }
+  ageOf() {
+    return `${this.#age}`;
+  }
 }
+
 
 //sub-classing
 //we have a base class (a super class) and a sub-class
@@ -82,9 +88,10 @@ console.log(kira instanceof Ogre); //false
 console.log(kira instanceof Character); //true
 
 
+console.log(kira.attack());
 /*
 Instance is creating a version of a Class
-Inheritance (extends) is inheriting something from a higher class
+Inheritance (extends) is inheriting something from a higher class (the superclass)
 */
 
 
