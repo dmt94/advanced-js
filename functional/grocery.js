@@ -146,9 +146,10 @@ function subtractAmount(totalCost) {
 }
 
 function review() {
-  console.log("These are your purchases:");
+  console.log("\nThese are your purchases:");
   let userPurchases = user.purchased;
   userPurchases.forEach(itemObj => console.log(`${itemObj['item']} ($${itemObj['price']})`));
+  return;
 }
 
 function showItems() {
@@ -178,6 +179,11 @@ function showItems() {
 
               return function addItem() {
                 let addToCart = addItemToCart();
+
+                if (addToCart.length < 4) {
+                  console.log("Type more characters");
+                  return addAisle()();
+                }
 
                 //check if chosen item input is an existing item in the aisle
                 let itemsInAisle = [];
@@ -212,14 +218,12 @@ function showItems() {
                   }
                 });
               }
-          }
+            }
           }
         }
-        
       }
     }
   }
-  return review()
 }
 
 getUser();
