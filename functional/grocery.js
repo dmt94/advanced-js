@@ -110,21 +110,6 @@ const user = {
   purchaseHistory: [],
 }
 
-let userPick = '';
-
-for (let category in GROCERY_ITEMS) {
-  for (let items in GROCERY_ITEMS[category]) {
-    let arrOfItems = GROCERY_ITEMS[category][items];
-
-    arrOfItems.forEach((itemObj) => {
-      if (itemObj['item'].includes(userPick)) {
-        // console.log(itemObj['item'], itemObj['price']);
-      }
-    })
-
-  }
-}
-
 function getUser() {
   let name = rlSync.question("What is your name?\n");
   user.name = name;
@@ -134,12 +119,37 @@ function getUser() {
 
 //user options to add to cart
 const yesOrNo = (question) => {
-  console.log(question);
+  console.log(`\n${question}`);
   return rlSync.question("YES or NO ?\n>>> ")
 };
 
-const addItemToCart = () => rlSync.question("What would you like to add to your cart?\n>>> ");
+const addItemToCart = () => rlSync.question("\nWhat would you like to add to your cart?\n>>> ");
 
+function calculateItems(arr) {
+  let totalPrice = [];
+  arr.forEach(obj => totalPrice.push(obj['price']));
+  return totalPrice.reduce((prev, curr) => (prev + curr), 0).toFixed(2);
+}
+
+function subtractAmount(totalCost) {
+  if (totalCost > user.userMoney) {
+    console.log(totalCost);
+    console.log(user.userMoney);
+    console.log("You don't have enough funds for this transaction");
+  } else {
+    let userMoneyLeft = user.userMoney - totalCost;
+    user.cart.forEach(itemObj => user.purchased.push(itemObj))
+    console.log(`Your total purchase was $${totalCost} and you had $${user.userMoney} to spend.`)
+    console.log(`You now have $${userMoneyLeft.toFixed(2)}`);
+    return review();
+  }
+}
+
+function review() {
+  console.log("These are your purchases:");
+  let userPurchases = user.purchased;
+  userPurchases.forEach(itemObj => console.log(`${itemObj['item']} ($${itemObj['price']})`));
+}
 
 function showItems() {
   console.log("\nAISLE:\n\nfruits\nmeats\nfrozen\ndessert\ndairy\ndrinks\ngrains\nhealth?\n");
@@ -163,31 +173,45 @@ function showItems() {
           return function addAisle() {
             let addToCart = yesOrNo("Would you like to add anything from this aisle to your cart?");
             if (addToCart.toLowerCase() === 'no') {
-              return showItems()()();
+              return showItems()()()();
             } else {
-              let addToCart =  addItemToCart();
 
-              //check if chosen item input is an existing item in the aisle
-              let itemsInAisle = [];
-              arrOfAisleItems.forEach(item => itemsInAisle.push(item.item));
-              
-              if (itemsInAisle.find(itemName => itemName.includes(addToCart)) === undefined) {
-                console.log('Item not found');
-                return addAisle();
-              }
+              return function addItem() {
+                let addToCart = addItemToCart();
 
-              arrOfAisleItems.forEach(item => {
-                if (item['item'].includes(addToCart) && addToCart.length >= 4) {
-                  user.cart.push(item);
-                  console.log(`${item['item']} ($${item['price']}) has been added to your cart.'`);
-                  let addMore = yesOrNo("Would you like to add more items to your cart?");
-                  if (addMore.toLowerCase() === 'yes') {
-
-                  }
-
-                   
+                //check if chosen item input is an existing item in the aisle
+                let itemsInAisle = [];
+                arrOfAisleItems.forEach(item => itemsInAisle.push(item.item));
+                
+                if (itemsInAisle.find(itemName => itemName.includes(addToCart)) === undefined) {
+                  console.log('Item not found');
+                  return addAisle()();
                 }
-              });
+  
+                arrOfAisleItems.forEach(item => {
+                  if (item['item'].includes(addToCart) && addToCart.length >= 4) {
+                    user.cart.push(item);
+                    console.log(`${item['item']} ($${item['price']}) has been added to your cart.'`);
+                    let addMore = yesOrNo("Would you like to add more items to your cart?");
+                    if (addMore.toLowerCase() === 'yes') {
+                      return addItem();
+                    } else if (addMore.toLowerCase() === 'no') {
+                      let finishPurchase = yesOrNo("Are you done with your grocery purchase? YES done or NO look at other aisles");
+                      if (finishPurchase.toLowerCase() === 'yes') {
+                        
+                        return subtractAmount(calculateItems(user.cart));
+
+                      } else if (finishPurchase.toLowerCase() === 'no') {
+                        return showItems()()()();
+                      }
+                    } else {
+                      console.log("Please type a valid answer.");
+                      return addAisle();
+                    }
+                     
+                  }
+                });
+              }
           }
           }
         }
@@ -195,11 +219,9 @@ function showItems() {
       }
     }
   }
+  return review()
 }
 
-
 getUser();
-showItems()()();
-
-console.log(user.cart);
+console.log(showItems()()()());
 
