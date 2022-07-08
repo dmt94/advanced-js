@@ -50,3 +50,9 @@ PURE FUNCTIONS
   - accept refunds
   - track user history
   */
+
+
+  let arr = ['fruit', 'apple'];
+
+
+  console.log(arr.find(element => element.includes('kuyg')));

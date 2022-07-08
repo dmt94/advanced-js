@@ -140,22 +140,6 @@ const yesOrNo = (question) => {
 
 const addItemToCart = () => rlSync.question("What would you like to add to your cart?\n>>> ");
 
-// const addItemFromThisAisle = () => {
-//   console.log("Would you like to add anything from this aisle to your cart?");
-//   return yesOrNo();
-// }
-
-// const buyMore = () => {
-//   console.log("Would you like to add more?");
-//   return yesOrNo();
-// };
-
-// //user options to complete purchase
-// const completePurchase = () => {
-//   console.log("Are you done grocery shopping?");
-//   return yesOrNo();
-// }
-
 
 function showItems() {
   console.log("\nAISLE:\n\nfruits\nmeats\nfrozen\ndessert\ndairy\ndrinks\ngrains\nhealth?\n");
@@ -176,19 +160,32 @@ function showItems() {
           console.log(`\nAvailable ${categoryPick}:\n`);
           arrOfAisleItems.forEach(item => console.log('- ' + item['item'] + ' : ' + item['price']));
 
-          return function() {
+          return function addAisle() {
             let addToCart = yesOrNo("Would you like to add anything from this aisle to your cart?");
             if (addToCart.toLowerCase() === 'no') {
-              return showItems()();
+              return showItems()()();
             } else {
               let addToCart =  addItemToCart();
+
+              //check if chosen item input is an existing item in the aisle
+              let itemsInAisle = [];
+              arrOfAisleItems.forEach(item => itemsInAisle.push(item.item));
+              
+              if (itemsInAisle.find(itemName => itemName.includes(addToCart)) === undefined) {
+                console.log('Item not found');
+                return addAisle();
+              }
+
               arrOfAisleItems.forEach(item => {
                 if (item['item'].includes(addToCart) && addToCart.length >= 4) {
                   user.cart.push(item);
-                  console.log(`${item['item']} ($${item['price']}) has been added to your cart.'`
-                   );
-                } else if (!(item['item'].includes(addToCart) && addToCart.length >= 4)) {
-                  console.log("Item not found.");
+                  console.log(`${item['item']} ($${item['price']}) has been added to your cart.'`);
+                  let addMore = yesOrNo("Would you like to add more items to your cart?");
+                  if (addMore.toLowerCase() === 'yes') {
+
+                  }
+
+                   
                 }
               });
           }
