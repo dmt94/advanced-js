@@ -114,3 +114,29 @@ PURE FUNCTIONS
   const multiplyBy10 = multiply(sum(5,3))(10);
 
   console.log(multiplyBy10);
+
+  /*
+  The biggest thing in functional programming
+  -- idea is that functions are very easy to test, compose, and avoid bugs
+  -- no mutations, shared states = predictability = less bugs
+
+  Can you have 100% pure functions? 
+  - side effects are inevitable
+  - need interaction with websites (make fetch calls, etc)
+  - goal of functions is to MINIMIZE SIDE EFFECTS
+  - purity is confidence level != 100%
+  - at the end of the day, we need some global state 
+
+  essence of functional programming
+  - we wanna build reusable functions
+
+
+  GOAL:
+  - one task , testable
+  - have return statement
+  - "pure", less side effect
+  - no shared state
+  - immutable state (avoid mutating global state)
+  - composable 
+  - predictable = 100% certainty
+  */
