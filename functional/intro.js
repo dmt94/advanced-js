@@ -55,4 +55,62 @@ PURE FUNCTIONS
   let arr = ['fruit', 'apple'];
 
 
-  console.log(arr.find(element => element.includes('kuyg')));
+  console.log(arr.find(element => element.includes('strawberry')));
+
+
+  /*
+  pure functions
+  - function always returns same output given same input
+  - cant modify outside of itself (no side effects)
+
+  side effects
+  - does function modify anything outside of itself
+  - using a shared state that can interact with anything
+  */
+
+  const array = [1,2,3,4];
+
+
+  function removeLastItem(arr) {
+    let arrayCopy = [...arr];
+    arrayCopy.pop();
+    return arrayCopy;
+  }
+
+  function mutateArray2(arr) {
+    let newArray = [...arr]
+    newArray.forEach(item => {
+      newArray.push(1); //adds to end of the array, depending on how much elements there are, we added number 1
+    })
+    return newArray;
+  }
+
+  const arr2 = removeLastItem(array);
+  const arr3 = mutateArray2(array);
+  const arr4 = multiplyBy2(array);
+
+  function multiplyBy2(arr) {
+    return arr.map(item => item * 2);
+  }
+
+  function greet() {
+    console.log('helllooo'); //console.log() is window specific, it logs something to browser, it affects external environment => output
+  }
+
+  //always returns the same output
+  function sum(num1, num2) {
+    return num1 + num2;
+  }
+  
+  sum(5,3);
+  // REFERENTIAL TRANSPARENCY
+
+  function multiply(num) {
+    return function(anotherNum) {
+      return num * anotherNum;
+    }
+  }
+
+  const multiplyBy10 = multiply(sum(5,3))(10);
+
+  console.log(multiplyBy10);

@@ -214,7 +214,6 @@ function showItems() {
                       console.log("Please type a valid answer.");
                       return addAisle();
                     }
-                     
                   }
                 });
               }
