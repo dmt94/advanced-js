@@ -1,3 +1,5 @@
+let rlSync = require('readline-sync');
+
 const GROCERY_ITEMS = [
   {fruits: 
     [
@@ -99,11 +101,16 @@ const GROCERY_ITEMS = [
 
 const user = {
   name: '',
-  money: '',
-  name: '',
+  userMoney: null,
+  money() {
+    return Math.floor(Math.random() * 700);
+  },
+  cart: [],
+  purchased: [],
+  purchaseHistory: [],
 }
 
-let userPick = 'beau';
+let userPick = '';
 
 for (let category in GROCERY_ITEMS) {
   for (let items in GROCERY_ITEMS[category]) {
@@ -111,9 +118,91 @@ for (let category in GROCERY_ITEMS) {
 
     arrOfItems.forEach((itemObj) => {
       if (itemObj['item'].includes(userPick)) {
-        console.log(itemObj['item'], itemObj['price']);
+        // console.log(itemObj['item'], itemObj['price']);
       }
     })
 
   }
 }
+
+function getUser() {
+  let name = rlSync.question("What is your name?\n");
+  user.name = name;
+  user.userMoney = user.money();
+  console.log(`Welcome to K+H Mart, ${name}! You have $${user.userMoney}.00 to spend!`);
+}
+
+//user options to add to cart
+const yesOrNo = (question) => {
+  console.log(question);
+  return rlSync.question("YES or NO ?\n>>> ")
+};
+
+const addItemToCart = () => rlSync.question("What would you like to add to your cart?\n>>> ");
+
+// const addItemFromThisAisle = () => {
+//   console.log("Would you like to add anything from this aisle to your cart?");
+//   return yesOrNo();
+// }
+
+// const buyMore = () => {
+//   console.log("Would you like to add more?");
+//   return yesOrNo();
+// };
+
+// //user options to complete purchase
+// const completePurchase = () => {
+//   console.log("Are you done grocery shopping?");
+//   return yesOrNo();
+// }
+
+
+function showItems() {
+  console.log("\nAISLE:\n\nfruits\nmeats\nfrozen\ndessert\ndairy\ndrinks\ngrains\nhealth?\n");
+  let categoryPick = rlSync.question("What aisle do you want to view?\n>>> ");
+
+  if (!['fruits', 'meats', 'frozen', 'dessert', 'dairy', 'drinks', 'grains', 'health'].includes(categoryPick)) {
+    console.log('input appropriate aisle');
+    return showItems();
+  } 
+
+  for (let category in GROCERY_ITEMS) {
+    for (let items in GROCERY_ITEMS[category]) {
+      let aisleCategory = items;
+
+      if (categoryPick === aisleCategory) {
+        return function() {
+          let arrOfAisleItems = GROCERY_ITEMS[category][categoryPick];
+          console.log(`\nAvailable ${categoryPick}:\n`);
+          arrOfAisleItems.forEach(item => console.log('- ' + item['item'] + ' : ' + item['price']));
+
+          return function() {
+            let addToCart = yesOrNo("Would you like to add anything from this aisle to your cart?");
+            if (addToCart.toLowerCase() === 'no') {
+              return showItems()();
+            } else {
+              let addToCart =  addItemToCart();
+              arrOfAisleItems.forEach(item => {
+                if (item['item'].includes(addToCart) && addToCart.length >= 4) {
+                  user.cart.push(item);
+                  console.log(`${item['item']} ($${item['price']}) has been added to your cart.'`
+                   );
+                } else if (!(item['item'].includes(addToCart) && addToCart.length >= 4)) {
+                  console.log("Item not found.");
+                }
+              });
+          }
+          }
+        }
+        
+      }
+    }
+  }
+}
+
+
+getUser();
+showItems()()();
+
+console.log(user.cart);
+
