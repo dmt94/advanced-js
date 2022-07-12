@@ -19,17 +19,48 @@ function yourSign(signType, sign) {
   return `\n${signType} => ${sign.toUpperCase()}\n`;
 }
 
-function rollSign() {
-  let sun = yourSign('sun', randomAstroSign(ASTRO_SIGNS));
-  let moon = yourSign('moon', randomAstroSign(ASTRO_SIGNS));
-  let rising = yourSign('rising', randomAstroSign(ASTRO_SIGNS));
-  let venus = yourSign('venus', randomAstroSign(ASTRO_SIGNS));
-  let mercury = yourSign('mercury', randomAstroSign(ASTRO_SIGNS));
-  let mars = yourSign('mars', randomAstroSign(ASTRO_SIGNS));
-  let jupiter = yourSign('jupiter', randomAstroSign(ASTRO_SIGNS));
-  let saturn = yourSign('saturn', randomAstroSign(ASTRO_SIGNS));
+function signCutOff(sunSign, arr) {
+  let indexOfSunSign = arr.indexOf(sunSign);
+  let arrOptions;
+  let firstTwo;
+  let lastTwo;
+  //edge cases
+  if (sunSign === 'aries') {
+    firstTwo = arr.slice(indexOfSunSign, 3);
+    lastTwo = arr.slice(indexOfSunSign - 2);
+    return firstTwo.concat(lastTwo);
+  } else if (sunSign === 'taurus') {
+    firstTwo = arr.slice(indexOfSunSign, 3);
+    lastTwo = arr.slice(indexOfSunSign - 1, indexOfSunSign);
+    lastTwo.push(arr[arr.length - 1], arr[arr.length - 2]);
+  } else if (sunSign === 'aquarius') {
+    firstTwo = arr.slice(indexOfSunSign, indexOfSunSign + 2);
+    firstTwo.push(arr[0]);
+    lastTwo = arr.slice(indexOfSunSign - 2, indexOfSunSign);
+  } else if (sunSign === 'pisces') {
+    firstTwo = arr.slice(0, 2);
+    lastTwo = arr.slice(indexOfSunSign - 2, arr.length);
+  } else {
+    arrOptions = arr.slice(indexOfSunSign - 2, indexOfSunSign + 3);
+    return randomAstroSign(arrOptions);
+  }
 
-  console.log(sun, moon, rising, venus, mercury, mars, jupiter, saturn);
+  arrOptions = firstTwo.concat(lastTwo);
+  return randomAstroSign(arrOptions);
 }
 
+function rollSign() {
+  let sunSign = randomAstroSign(ASTRO_SIGNS);
+  let sun = yourSign('sun', sunSign);
+  let moon = yourSign('moon', signCutOff(sunSign, ASTRO_SIGNS));
+  let rising = yourSign('rising', randomAstroSign(ASTRO_SIGNS));
+  let venus = yourSign('venus', signCutOff(sunSign, ASTRO_SIGNS));
+  let mercury = yourSign('mercury', signCutOff(sunSign, ASTRO_SIGNS));
+  let mars = yourSign('mars', signCutOff(sunSign, ASTRO_SIGNS));
+
+  console.log(sunSign, sun, moon, rising, venus, mercury, mars);
+}
+
+
 rollSign();
+
