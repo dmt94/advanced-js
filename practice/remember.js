@@ -9,7 +9,7 @@ let messages = [
   "Commit and stay present. Love where you are at. Have gratitude right now.",
   "Breathe. Enjoy your breath. Enjoy the Light that is right now.",
   "See reality as it is right now for you.",
-  "Do not identify with circumstances that are irrelevant to how your Life is at in the present, to where your focus should be on.",
+  "Do not identify with circumstances that are irrelevant to where your focus should be on at present.",
   "See Life with joy and compassion. Continue to learn and grow mindfully.",
 ];
 
