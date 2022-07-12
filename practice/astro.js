@@ -16,7 +16,7 @@ const ASTRO_SIGNS = [
 const randomAstroSign = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 function yourSign(signType, sign) {
-  return `\n${signType} => ${sign}\n`;
+  return `\n${signType} => ${sign.toUpperCase()}\n`;
 }
 
 function rollSign() {
