@@ -52,17 +52,17 @@ function signCutOff(sunSign, arr) {
 function rollSign() {
   let sunSign = randomAstroSign(ASTRO_SIGNS);
   let sun = yourSign('sun', sunSign);
-  console.log(sun);
+
   let moon = yourSign('moon', signCutOff(sunSign, ASTRO_SIGNS));
-  console.log(moon);
+
   let rising = yourSign('rising', randomAstroSign(ASTRO_SIGNS));
-  console.log(rising);
+
   let venus = yourSign('venus', signCutOff(sunSign, ASTRO_SIGNS));
-  console.log(venus);
+
   let mercury = yourSign('mercury', signCutOff(sunSign, ASTRO_SIGNS));
-  console.log(mercury);
+
   let mars = yourSign('mars', signCutOff(sunSign, ASTRO_SIGNS));
-  console.log(mars);
+
 
   console.log(sun, moon, rising, venus, mercury, mars);
 }
