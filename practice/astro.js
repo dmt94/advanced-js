@@ -16,7 +16,7 @@ const ASTRO_SIGNS = [
 const randomAstroSign = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 function yourSign(signType, sign) {
-  return `\n${signType} => ${sign.toUpperCase()}\n`;
+  return `\n${signType} => ${sign}\n`;
 }
 
 function signCutOff(sunSign, arr) {
@@ -28,7 +28,7 @@ function signCutOff(sunSign, arr) {
   if (sunSign === 'aries') {
     firstTwo = arr.slice(indexOfSunSign, 3);
     lastTwo = arr.slice(indexOfSunSign - 2);
-    return firstTwo.concat(lastTwo);
+    // return firstTwo.concat(lastTwo);
   } else if (sunSign === 'taurus') {
     firstTwo = arr.slice(indexOfSunSign, 3);
     lastTwo = arr.slice(indexOfSunSign - 1, indexOfSunSign);
@@ -52,13 +52,19 @@ function signCutOff(sunSign, arr) {
 function rollSign() {
   let sunSign = randomAstroSign(ASTRO_SIGNS);
   let sun = yourSign('sun', sunSign);
+  console.log(sun);
   let moon = yourSign('moon', signCutOff(sunSign, ASTRO_SIGNS));
+  console.log(moon);
   let rising = yourSign('rising', randomAstroSign(ASTRO_SIGNS));
+  console.log(rising);
   let venus = yourSign('venus', signCutOff(sunSign, ASTRO_SIGNS));
+  console.log(venus);
   let mercury = yourSign('mercury', signCutOff(sunSign, ASTRO_SIGNS));
+  console.log(mercury);
   let mars = yourSign('mars', signCutOff(sunSign, ASTRO_SIGNS));
+  console.log(mars);
 
-  console.log(sunSign, sun, moon, rising, venus, mercury, mars);
+  console.log(sun, moon, rising, venus, mercury, mars);
 }
 
 
