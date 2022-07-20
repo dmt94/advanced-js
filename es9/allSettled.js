@@ -25,19 +25,24 @@ Below we have 3 promises, which resolves at random times.
 */
 
 const p1 = new Promise((resolve, reject) => {
-  setTimeout(() => reject("A"), Math.floor(Math.random() * 1000));
+  setTimeout(() => resolve("A"), Math.floor(Math.random() * 1000));
 });
 const p2 = new Promise((resolve, reject) => {
-  setTimeout(() => reject("B"), Math.floor(Math.random() * 1000));
+  setTimeout(() => resolve("B"), Math.floor(Math.random() * 1000));
 });
 const p3 = new Promise((resolve, reject) => {
-  setTimeout(() => reject("C"), Math.floor(Math.random() * 1000));
+  setTimeout(() => resolve("C"), Math.floor(Math.random() * 1000));
 });
 
 //Out of p1, p2 and p3, whichever resolves first is taken by Promise.any()
 (async function () {
-  const result = await Promise.any([p1, p2, p3]);
-  console.log(result); // Prints "A", "B" or "C"
+  try {
+    const result = await Promise.any([p1, p2, p3]);
+    console.log(result); // Prints "A", "B" or "C"
+  }
+  catch (e) {
+    console.log("oooops sorry an error occured", e);
+  }
 })();
 
 // if none of the promises resolve? In that case Promise.any() throws an error!
