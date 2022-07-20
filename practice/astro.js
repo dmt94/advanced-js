@@ -63,7 +63,6 @@ function rollSign() {
 
   let mars = yourSign('mars', signCutOff(sunSign, ASTRO_SIGNS));
 
-
   console.log(sun, moon, rising, venus, mercury, mars);
 }
 
