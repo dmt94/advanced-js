@@ -4,38 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Module Pattern Exercise</title>
+  <title>ES6 Modules</title>
+  <h1>ES6 Modules</h1>
+  <h3>YAAAAAAAY</h3>
 </head>
 <body>
-  <h1>Module Pattern Practice!</h1>
-  <h4>Check my console ;) </h4>
-  <script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
-  <script src="./module-pattern.js"></script>
-  <script>
-    var globalSecret = 'hunkleGf';
-    var fight = 'hehe';
-  </script>
-  <!-- <script>
-    var scrip2 = (function() {
-      $('h1').click(function(){
-        $('h1').hide();
-      })
-      globalSecret = 'kireiBf'; //modified the global variable above
-    })()
-  </script> -->
-
-  <!--when variable is enclosed as a parameter, it keeps 
-  it within the function scope-->
-  <script>
-    var scrip2 = (function(globalSecret) {
-      $('h1').click(function(){
-        $('h1').hide();
-      })
-      globalSecret = 'kireiBf'; //wont modify global variable
-    })()
+  <!--define script as a module, this is an ES6 Module-->
+  <!--we are going to need to serve it to a server-->
+  <script type="module">
+    //wont pollute global namespace
+    import fight, { jump } from './es6-modules.js';
+    console.log(fight('ron', 'hedwig'));
+    console.log(jump());
   </script>
 </body>
 </html>
