@@ -12,7 +12,7 @@ let kirei_pokemon = {
 
 let hunkle_pokemon = {
   arceus: {
-    type: 'electric',
+    type: ['electric', 'flying', 'steel'],
     legendary: true,
     cp: 4200,
     moves: [
