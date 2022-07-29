@@ -206,6 +206,8 @@ function displayTop(arr) {
   arr.forEach((data, index) => console.log(`#${index + 1}: ${data}`));
 };
 
+//input choices
+
 const inputCareerChoice = () => {
   let inputChoice = readline.question(`=> Pick career choice\n=> `);
   if (!professions(astroProfessions).includes(inputChoice.toLowerCase())) {
