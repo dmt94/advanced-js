@@ -226,5 +226,4 @@ const inputNumberTop = () => {
 
 const displayCareerZodiacTop = (career, number) => displayTop(inputTop(number, chosenData(career)));
 
-
-console.log(displayCareerZodiacTop(inputCareerChoice(), inputNumberTop()));
+displayCareerZodiacTop(inputCareerChoice(), inputNumberTop());
