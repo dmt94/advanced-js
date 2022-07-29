@@ -157,20 +157,20 @@ const astroProfessions = {
     {psychologist: 33},
     {billionaire: 24},
   ],
-}
+};
 
 const professions = (obj) => {
   let careers = obj['aries'].map((item) => {
     return Object.entries(item)[0][0];
   })
   return careers;
-}
+};
 
 function displayCareerChoices(arr) {
   console.log("Career choices:\n");
   arr.forEach(career => console.log(`${career}`.toUpperCase()));
   console.log('\n');
-}
+};
 
 displayCareerChoices(professions(astroProfessions));
 
@@ -188,7 +188,7 @@ function countTotal(obj, profession) {
     let percentage = (arr[1] / totalSum);
     return arr[index] = [`${arr[0]}`, `${percentage}`];
   })
-}
+};
 
 const chosenData = (chosenProfession) => {
   return countTotal(astroProfessions, chosenProfession);
@@ -200,11 +200,11 @@ function inputTop(num, arr) {
   return theTop.reverse().slice(0, num).map((arr) => {
     return `${arr[0]} => ${(arr[1] * 100).toFixed(2)}%`;
   });
-}
+};
 
 function displayTop(arr) {
   arr.forEach((data, index) => console.log(`#${index + 1}: ${data}`));
-}
+};
 
 const inputCareerChoice = () => {
   let inputChoice = readline.question(`=> Pick career choice\n=> `);
@@ -213,7 +213,7 @@ const inputCareerChoice = () => {
     return inputCareerChoice();
   }
   return inputChoice.toLowerCase(); 
-}
+};
 
 const inputNumberTop = () => {
   let inputChoice = readline.question(`=> Input top choice (1-12)\n=> `);
@@ -222,7 +222,7 @@ const inputNumberTop = () => {
     return inputNumberTop();
   }
   return Number(inputChoice);
-}
+};
 
 const displayCareerZodiacTop = (career, number) => displayTop(inputTop(number, chosenData(career)));
 
