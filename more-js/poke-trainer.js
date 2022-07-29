@@ -19,12 +19,6 @@ function shinyOrNot() {
 
 const STARTER_POKEMON = [
   {
-    name: 'rowlet',
-    type: ['grass', 'flying'],
-    cp: grabRandomNumber(),
-    shiny: shinyOrNot()
-  },
-  {
     name: 'litten',
     type: ['fire'],
     cp: grabRandomNumber(),
