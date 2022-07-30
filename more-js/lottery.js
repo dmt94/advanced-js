@@ -69,17 +69,19 @@ function play() {
 
 function winningConditions(userNumbers, winningNumbers) {
   let winningPoint = 0;
-  let citrinePoint;
+  let citrinePoint = 0;
   let citrine = winningNumbers[winningNumbers.length - 1];
+
+  if (citrine === userNumbers.splice(userNumbers.length - 1, userNumbers.length)) {
+    citrinePoint += 1;
+  }
+
   let finalWinningNumbers = winningNumbers.flat();
-  userNumbers.flat().forEach((num) => {
-    if (finalWinningNumbers.includes(num)) {
-      if (finalWinningNumbers.indexOf(num) === finalWinningNumbers.length - 1) {
-        citrinePoint += 1;
-      }
+  userNumbers.flat().splice(0, userNumbers.length - 2).forEach((num) => {
+    if (finalWinningNumbers.splice(0, finalWinningNumbers.length - 2).includes(num)) {
       winningPoint += 1;
     }
-  })
+  });
 }
 
 play();
